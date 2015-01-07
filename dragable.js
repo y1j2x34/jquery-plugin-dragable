@@ -5,7 +5,7 @@
 		* backward : 返回原地
 		* forward : 停留在目标
 		*/
-		fillMode:"backward",//or forward
+		fillMode:"forward",//or backward
 		/**
 		* 退拽是否在原地形成虚线
 		*/
@@ -189,8 +189,8 @@
 	$.fn.dragable.help = function(){
 		return [
 			"fillMode：'backward','forward',function(opt,cb){}",
-		"	backward：拖拽结束后返回（默认动作）",
-		"	forward：拖拽结束后停留在结果位置",
+		"	backward：拖拽结束后返回",
+		"	forward：拖拽结束后停留在结束位置（默认动作）",
 		"	function(e,opt){}",
 		"dashed: false,true，是否在原来的位置留一个虚线框",
 		"style: 设置拖拽时的样式",
