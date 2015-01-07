@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC>
+<html>
+ <head>
+  <title> 拖拽插件 </title>
+  <meta charset="utf-8">
+  <style type="text/css">
+	.block{
+		width:50px;
+		height:50px;
+		border:1px solid blue;
+		cursor:move;
+		position:static;
+		left:175px;
+		border-radius:5px;
+	}
+	#block1{
+		top:20px;
+	}
+	#block2{
+		top:80px;
+	}
+	#box{
+		width:400px;
+		height:400px;
+		border:1px solid black;
+		vertical-align:middle;
+		margin:100px auto;
+		position:relative;
+	}
+	body,html{
+		padding:0;
+		margin:0;
+	}
+  </style>
+  <script type="text/javascript" src="jquery-2.0.3.js"></script>
+  <script type="text/javascript" src="dragable.js"></script>
+  <script type="text/javascript">
+	
+	jQuery(function($){
+		$("#block1").dragable({
+			dashed:{
+				"box-shadow":"0 0 20px 0px gray inset"
+			},
+			style:{
+				opacity:0.5,
+				backgroundColor:"gray"
+			},
+			fillMode:function(opt,cb){
+				this.animate(opt.data.startPos,cb);
+			},
+			onDrag:function(e,opt){
+				/*var pos = this.offset();
+				if(pos.left >= 600){
+					this.css("left",700);
+				}else if(pos.left < 100){
+					this.css("left",0);
+				}
+				if(pos.top < 100){
+					this.css("top",0);
+				}else if(pos.top > 500){
+					this.css("top",600);
+				}*/
+			}
+		});
+		$("#block2").dragable({
+			dashed:false,
+			fillMode:"forward"
+		});
+	});
+  </script>
+ </head>
+ <body>
+	<div id="box">
+		<div id="block1" class="block"></div>
+		<div id="block2" class="block"></div>
+	</div>
+ </body>
+</html>
