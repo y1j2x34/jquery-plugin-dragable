@@ -73,7 +73,7 @@
 		//拖动开始事件
 		opt.onStart.call($(t),e,opt);
 	};
-	//拖拽借宿
+	//拖拽结束
 	var _onDragStop = function(e,opt){
 		var t = this;
 		//恢复到拖拽前样式
