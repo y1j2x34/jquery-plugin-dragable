@@ -25,7 +25,9 @@
 		backward:function(opt,cb){
 			this.css(opt.data.startPos,cb);
 		},
-		forward:emptyfn
+		forward:function(opt,cb){
+			return cb();
+		}
 	};
 	var _onDrag = function(e,opt){
 		var 
