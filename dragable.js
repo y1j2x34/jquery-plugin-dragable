@@ -1,3 +1,8 @@
+/**
+ * https://github.com/y1j2x34/jquery-plugin-draggable
+ * @author y1j2x34
+ * @param $ jQuery
+ */
 (function($){
 	var emptyfn = function(){};
 	var defaults = {
@@ -52,10 +57,11 @@
 			left:pos.left,
 			top:pos.top
 		};
+		
 		//鼠标与被拖拽元素的坐标偏移
 		opt.data.mouseOffset = {
-			left:e.offsetX,
-			top:e.offsetY
+			left:e.offsetX + ($(e.target).offset().left - t.offset().left),
+			top:e.offsetY + ($(e.target).offset().top - t.offset().top)
 		};
 		//显示虚线框
 		if(opt.data.dashed){
@@ -110,11 +116,11 @@
 			}
 		});
 	};
-	$.fn.dragable = function(opt){
+	$.fn.draggable = function(opt){
 		var len = this.length;
 		if(len > 1){
 			this.each(function(k,v){
-				$(v).dragable(opt);
+				$(v).draggable(opt);
 			});
 			return this;
 		}else if(len == 0){
@@ -122,11 +128,11 @@
 		}
 				
 		if(false === opt){
-			this.unbind("mousedown.dragable");
-			var id = this.data("dragable-id");
+			this.unbind("mousedown.draggable");
+			var id = this.data("draggable-id");
 			$(document)
-				.unbind("mousemove.dragable-"+id)
-				.unbind("mouseup.dragable-"+id);
+				.unbind("mousemove.draggable-"+id)
+				.unbind("mouseup.draggable-"+id);
 			return;
 		};
 		
@@ -158,14 +164,14 @@
 			}
 			opt.data.dashed = dashed;
 		}
-		self.data("dragable-id",id);
-		self.bind("mousedown.dragable",function(e){
+		self.data("draggable-id",id);
+		self.bind("mousedown.draggable",function(e){
 			target = $(this);
 			mousedown = true;
 			e.stopPropagation();
 			$doc.selection(false);
 		});
-		$doc.bind("mousemove.dragable-"+id,function(e){
+		$doc.bind("mousemove.draggable-"+id,function(e){
 			if(false === mousedown)return
 			if(!started){
 				_onDragStart.call(self,e,opt);
@@ -173,7 +179,7 @@
 			started = true;
 			_onDrag.call(self,e,opt);
 		});
-		$doc.bind("mouseup.dragable-"+id,function(e){
+		$doc.bind("mouseup.draggable-"+id,function(e){
 			if(false === mousedown)return;
 			mousedown = false;
 			if(undefined != target && target.is(self)){
@@ -186,9 +192,9 @@
 		return this;
 	};
 	//暴露默认配置
-	$.fn.dragable.defaults = defaults;
+	$.fn.draggable.defaults = defaults;
 	//使用帮助
-	$.fn.dragable.help = function(){
+	$.fn.draggable.help = function(){
 		return [
 			"fillMode：'backward','forward',function(opt,cb){}",
 		"	backward：拖拽结束后返回",
